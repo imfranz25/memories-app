@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, AppBar, Typography, Grow, Grid } from "@mui/material/";
 
 // Assets
@@ -6,7 +6,15 @@ import memories from "./images/memories.png";
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 
-export default function App() {
+import { getPosts } from "./actions/post";
+import { useDispatch } from "react-redux";
+
+function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
 
   return (
     <Container maxWidth="lg">
@@ -31,3 +39,5 @@ export default function App() {
     </Container>
   )
 }
+
+export default App;

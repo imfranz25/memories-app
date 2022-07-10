@@ -14,4 +14,9 @@ import "./App.scss";
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);

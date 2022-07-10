@@ -1,7 +1,7 @@
-const reducer = (post = [], action) => {
+export default (post = [], action) => {
   switch (action.type) {
     case "FETCH_ALL":
-      return post;
+      return [1,2];
     case "CREATE":
       return post;
     case "DELETE":
@@ -9,6 +9,6 @@ const reducer = (post = [], action) => {
     case "UPDATE":
       return post;
     default:
-      break;
+      return post;
   }
 }
