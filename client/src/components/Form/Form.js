@@ -69,7 +69,7 @@ export default function Form({ currentId, setCurrentId }) {
           label="Tags" 
           fullWidth 
           value={postData.tags} 
-          onChange={(e) => setpostData({...postData, tags: e.target.value})}
+          onChange={(e) => setpostData({...postData, tags: e.target.value.split(",")})}
         />
         <div className="file-input">
           <FileBase

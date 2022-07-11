@@ -36,21 +36,21 @@ export default function Post({post, setCurrentId}) {
       </div>
       <div className="details">
         <Typography variant="body2" color="textSecondary">
-          {post.tags.map((tag, index) => <span key={tag+index}>#{tag}</span>)}
+          {post.tags.map((tag, index) => <span key={tag+index}>#{tag} </span>)}
         </Typography>
       </div>
       <Typography variant="h5" gutterBottom className="title">
           {post.title}
       </Typography> 
       <CardContent>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="body2" color="textSecondary" component="p">
           {post.message}
         </Typography> 
       </CardContent>
       <CardActions className="card-actions">
         <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
           <ThumbUpAltIcon fontSize="small" />
-          Like
+          &nbsp; Like &nbsp;
           {post.likeCount}
         </Button>
          <Button size="small" color="error" onClick={() => dispatch(deletePost(post._id))}>
