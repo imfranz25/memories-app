@@ -13,7 +13,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./Post.scss";
 
-export default function Post({post}) {
+export default function Post({post, setCurrentId}) {
   return (
     <Card className="card">
       <CardMedia className="media" image={post.selectedFile} title={post.title} />
@@ -22,7 +22,11 @@ export default function Post({post}) {
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
       <div className="overlay-2">
-        <Button style={{color: "white"}} size="small" onClick={()=> {}}>
+        <Button 
+          style={{color: "white"}} 
+          size="small" 
+          onClick={() => setCurrentId(post._id)}
+        >
           <MoreHorizIcon fontSize="small"/>
         </Button>
       </div>
@@ -31,6 +35,9 @@ export default function Post({post}) {
           {post.tags.map((tag, index) => <span key={tag+index}>#{tag}</span>)}
         </Typography>
       </div>
+      <Typography variant="h5" gutterBottom className="title">
+          {post.title}
+      </Typography> 
       <CardContent>
         <Typography variant="h5" gutterBottom>
           {post.message}
@@ -42,7 +49,7 @@ export default function Post({post}) {
           Like
           {post.likeCount}
         </Button>
-         <Button size="small" color="primary" onClick={() => {}}>
+         <Button size="small" color="error" onClick={() => {}}>
           <DeleteIcon fontSize="small" />
           Delete
         </Button>
