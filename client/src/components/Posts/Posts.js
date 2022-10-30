@@ -6,7 +6,9 @@ import { Typography } from '@mui/material';
 import Post from './Post/Post';
 
 function Posts() {
-  const posts = useSelector((state) => state.post);
+  const posts = useSelector((state) => {
+    return state.posts;
+  });
   console.log(posts);
   return (
     <>
