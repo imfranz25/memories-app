@@ -1,0 +1,12 @@
+.main-container {
+  display: flex;
+  align-items: center;
+}
+
+.sm-margin {
+  margin: 2px;
+}
+
+.action-div {
+  text-align: center;
+}
