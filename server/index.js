@@ -25,7 +25,7 @@ app.use(bodyParser.json({ limit: '30mb', extended: true })); // Accept JSON Data
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true })); // Accept Form Data w/ upload
 
 // User Routes
-app.use('/post', postRoute);
+app.use('/posts', postRoute);
 
 app.get('/', (req, res) => {
   res.send('Memories API by Francis Ong');
