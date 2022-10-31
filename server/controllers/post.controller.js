@@ -6,7 +6,7 @@ const getPosts = async (req, res, next) => {
     const postMessages = await PostMessage.find();
     res.status(200).json(postMessages);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(409).json({ message: error.message });
   }
 };
 
@@ -16,7 +16,6 @@ const createPost = async (req, res, next) => {
 
   try {
     await newPost.save();
-    console.log(newPost);
     res.status(201).json(newPost);
   } catch (error) {
     res.status(409).json({ message: error.message });
@@ -37,4 +36,32 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-export { getPosts, createPost, deletePost };
+const updatePost = async (req, res, next) => {
+  const { postId } = req.params;
+  const { title, message, creator, tags, selected } = req.body;
+
+  if (!mongoose.isValidObjectId(postId)) {
+    return res.status(404).json({ message: 'Post not found !' });
+  }
+
+  try {
+    const post = await PostMessage.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found!' });
+    }
+
+    post.title = title;
+    post.message = message;
+    post.creator = creator;
+    post.tags = tags;
+    post.selectedFile = selectedFile;
+
+    const updatedPost = await post.save();
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+export { getPosts, createPost, updatePost, deletePost };
