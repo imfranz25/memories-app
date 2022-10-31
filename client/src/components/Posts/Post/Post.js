@@ -15,7 +15,8 @@ import './styles.css';
 function Post({ post, setCurrentPostId }) {
   const dispatch = useDispatch();
   const handleDelete = (postId) => {
-    dispatch(deletePost(postId));
+    const isConfirmDelete = window.confirm('Are you sure you want to delete this post?');
+    if (isConfirmDelete) dispatch(deletePost(postId));
   };
   return (
     <>
