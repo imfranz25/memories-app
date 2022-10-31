@@ -34,10 +34,13 @@ function Post({ post }) {
         </CardContent>
         <CardActions className="card-actions">
           <Button size="small" color="primary" onClick={() => {}}>
-            <ThumbUpIcon fontSize="medium" />
+            <ThumbUpIcon fontSize="medium" style={{ marginRight: '5px' }} />
+            Like
+            <div style={{ marginLeft: '5px' }}>{post.likeCount}</div>
           </Button>
           <Button size="small" color="error" onClick={() => {}}>
             <DeleteIcon fontSize="medium" />
+            Delete
           </Button>
         </CardActions>
       </Card>
