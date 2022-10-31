@@ -74,20 +74,23 @@ function Form({ setCurrentPostId, currentPostId }) {
           fullWidth
         />
         <TextField
-          name="message"
-          label="Message"
-          variant="outlined"
-          value={postData.message}
-          onChange={(e) => setPostData({ ...postData, message: e.target.value })}
-          className="text-field"
-          fullWidth
-        />
-        <TextField
           name="tags"
           label="Tags"
           variant="outlined"
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          className="text-field"
+          fullWidth
+        />
+        <TextField
+          name="message"
+          label="Message"
+          variant="outlined"
+          multiline
+          rows={4}
+          maxRows={4}
+          value={postData.message}
+          onChange={(e) => setPostData({ ...postData, message: e.target.value })}
           className="text-field"
           fullWidth
         />

@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, DELETE, UPDATE } from '../constants/action.js';
+import { FETCH_ALL, CREATE, DELETE, UPDATE } from '../constants/actionTypes.js';
 
 const reducer = (posts = [], action) => {
   switch (action.type) {
