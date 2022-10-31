@@ -1,5 +1,6 @@
 const FETCH_ALL = 'FETCH_ALL';
 const CREATE = 'CREATE';
 const DELETE = 'DELETE';
+const UPDATE = 'UPDATE';
 
-export { FETCH_ALL, CREATE, DELETE };
+export { FETCH_ALL, CREATE, DELETE, UPDATE };
