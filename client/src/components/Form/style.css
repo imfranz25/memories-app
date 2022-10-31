@@ -3,6 +3,7 @@
 }
 
 .form {
+  padding: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -13,6 +14,7 @@
   margin: 10px 0;
 }
 
-button-submit {
-  margin-bottom: 10px;
+.button-submit,
+.text-field {
+  margin: 5px 0 !important;
 }

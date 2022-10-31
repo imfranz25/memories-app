@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextField, Paper, Button, Typography } from '@mui/material';
 import FileBase from 'react-file-base64';
+
+// Actions
+import { createPost } from '../../actions/posts';
 
 // Resources
 import './style.css';
 
 function Form() {
+  const dispatch = useDispatch();
   const [postData, setPostData] = useState({
     creator: '',
     title: '',
@@ -14,7 +19,7 @@ function Form() {
     selectedFile: '',
   });
 
-  const clearForm = () => {
+  const clearForm = (e) => {
     setPostData({
       creator: '',
       title: '',
@@ -24,8 +29,9 @@ function Form() {
     });
   };
 
-  const handleSubmit = () => {
-    alert('post submitted');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createPost(postData));
   };
 
   return (
@@ -38,6 +44,7 @@ function Form() {
           variant="outlined"
           value={postData.creator}
           onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
+          className="text-field"
           fullWidth
         />
         <TextField
@@ -46,6 +53,7 @@ function Form() {
           variant="outlined"
           value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+          className="text-field"
           fullWidth
         />
         <TextField
@@ -54,6 +62,7 @@ function Form() {
           variant="outlined"
           value={postData.message}
           onChange={(e) => setPostData({ ...postData, message: e.target.value })}
+          className="text-field"
           fullWidth
         />
         <TextField
@@ -62,6 +71,7 @@ function Form() {
           variant="outlined"
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          className="text-field"
           fullWidth
         />
         <div className="file-input">
@@ -71,10 +81,24 @@ function Form() {
             onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
           />
         </div>
-        <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          className="button-submit"
+          fullWidth
+        >
           Submit
         </Button>
-        <Button variant="contained" color="secondary" size="smail" onClick={clearForm} fullWidth>
+        <Button
+          variant="contained"
+          color="secondary"
+          size="smail"
+          onClick={clearForm}
+          className="button-submit"
+          fullWidth
+        >
           Clear
         </Button>
       </form>
