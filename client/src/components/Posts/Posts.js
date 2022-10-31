@@ -1,6 +1,6 @@
 // Modules
 import { useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
+import { Grid, CircularProgress } from '@mui/material';
 
 // Component(s)
 import Post from './Post/Post';
@@ -10,11 +10,17 @@ function Posts() {
     return state.posts;
   });
   console.log(posts);
-  return (
+  return !posts.length ? (
+    <CircularProgress />
+  ) : (
     <>
-      <Typography variant="h5">Posts</Typography>
-      <Post />
-      <Post />
+      <Grid className="main-container" alignItems="stretch" spacing={3} container>
+        {posts.map((post) => (
+          <Grid key={post._id} xs={12} sm={6} item>
+            <Post post={post} />
+          </Grid>
+        ))}
+      </Grid>
     </>
   );
 }
