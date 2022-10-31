@@ -4,11 +4,19 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+
+// Actions
+import { deletePost } from '../../../actions/posts.js';
 
 //Resources
 import './styles.css';
 
 function Post({ post }) {
+  const dispatch = useDispatch();
+  const handleDelete = (postId) => {
+    dispatch(deletePost(postId));
+  };
   return (
     <>
       <Card className="card">
@@ -38,7 +46,13 @@ function Post({ post }) {
             Like
             <div style={{ marginLeft: '5px' }}>{post.likeCount}</div>
           </Button>
-          <Button size="small" color="error" onClick={() => {}}>
+          <Button
+            size="small"
+            color="error"
+            onClick={() => {
+              handleDelete(post._id);
+            }}
+          >
             <DeleteIcon fontSize="medium" />
             Delete
           </Button>

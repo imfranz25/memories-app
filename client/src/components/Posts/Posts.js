@@ -9,7 +9,7 @@ function Posts() {
   const posts = useSelector((state) => {
     return state.posts;
   });
-  console.log(posts);
+
   return !posts.length ? (
     <CircularProgress />
   ) : (

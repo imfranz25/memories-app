@@ -16,6 +16,7 @@ const createPost = async (req, res, next) => {
 
   try {
     await newPost.save();
+    console.log(newPost);
     res.status(201).json(newPost);
   } catch (error) {
     res.status(409).json({ message: error.message });
@@ -29,8 +30,8 @@ const deletePost = async (req, res, next) => {
       return res.status(404).json({ message: 'Post not found !' });
     }
 
-    await PostMessage.findByIdAndDelete(postId);
-    res.status(204).json({ message: 'Post deleted' });
+    const deletedPost = await PostMessage.findByIdAndDelete(postId);
+    res.status(200).json(deletedPost);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }

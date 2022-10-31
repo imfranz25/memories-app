@@ -1,5 +1,5 @@
 import * as api from '../api/index';
-import { FETCH_ALL, CREATE } from '../constants/action';
+import { FETCH_ALL, CREATE, DELETE } from '../constants/action';
 
 const getPosts = () => async (dispatch) => {
   try {
@@ -20,4 +20,13 @@ const createPost = (newPost) => async (dispatch) => {
   }
 };
 
-export { getPosts, createPost };
+const deletePost = (postId) => async (dispatch) => {
+  try {
+    const { data } = await api.deletePost(postId);
+    dispatch({ type: DELETE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export { getPosts, createPost, deletePost };
