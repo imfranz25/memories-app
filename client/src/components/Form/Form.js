@@ -1,16 +1,19 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Paper, Button, Typography } from '@mui/material';
 import FileBase from 'react-file-base64';
 
 // Actions
-import { createPost } from '../../actions/posts';
+import { createPost, updatePost } from '../../actions/posts';
 
 // Resources
 import './style.css';
 
-function Form() {
+function Form({ setCurrentPostId, currentPostId }) {
   const dispatch = useDispatch();
+  const post = useSelector((state) =>
+    currentPostId ? state.posts.find((p) => p._id === currentPostId) : null
+  );
   const [postData, setPostData] = useState({
     creator: '',
     title: '',
@@ -31,14 +34,27 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(postData));
+
+    if (currentPostId) {
+      dispatch(updatePost(currentPostId, postData));
+      setCurrentPostId(null);
+    } else {
+      dispatch(createPost(postData));
+    }
+
     clearForm();
   };
+
+  useEffect(() => {
+    if (post) {
+      setPostData(post);
+    }
+  }, [currentPostId, post]);
 
   return (
     <Paper className="paper">
       <form autoComplete="off" className="form" onSubmit={handleSubmit} noValidate>
-        <Typography variant="h6">Creating a Memory</Typography>
+        <Typography variant="h6">{currentPostId ? 'Editing' : 'Creating'} a Memory</Typography>
         <TextField
           name="creator"
           label="Creator"

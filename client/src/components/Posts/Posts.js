@@ -5,7 +5,7 @@ import { Grid, CircularProgress } from '@mui/material';
 // Component(s)
 import Post from './Post/Post';
 
-function Posts() {
+function Posts({ setCurrentPostId }) {
   const posts = useSelector((state) => {
     return state.posts;
   });
@@ -17,7 +17,7 @@ function Posts() {
       <Grid className="main-container" alignItems="stretch" spacing={3} container>
         {posts.map((post) => (
           <Grid key={post._id} xs={12} sm={6} item>
-            <Post post={post} />
+            <Post post={post} setCurrentPostId={setCurrentPostId} />
           </Grid>
         ))}
       </Grid>

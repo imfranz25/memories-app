@@ -38,26 +38,23 @@ const deletePost = async (req, res, next) => {
 
 const updatePost = async (req, res, next) => {
   const { postId } = req.params;
-  const { title, message, creator, tags, selected } = req.body;
+  const post = req.body;
 
   if (!mongoose.isValidObjectId(postId)) {
     return res.status(404).json({ message: 'Post not found !' });
   }
 
   try {
-    const post = await PostMessage.findById(postId);
+    const updatedPost = await PostMessage.findByIdAndUpdate(
+      postId,
+      { ...post, _id: postId },
+      { new: true }
+    );
 
-    if (!post) {
-      return res.status(404).json({ message: 'Post not found!' });
+    if (!updatedPost) {
+      return res.status(404).json({ message: 'Post not found !' });
     }
 
-    post.title = title;
-    post.message = message;
-    post.creator = creator;
-    post.tags = tags;
-    post.selectedFile = selectedFile;
-
-    const updatedPost = await post.save();
     res.status(200).json(updatedPost);
   } catch (error) {
     res.status(409).json({ message: error.message });

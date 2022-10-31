@@ -12,7 +12,7 @@ import { deletePost } from '../../../actions/posts.js';
 //Resources
 import './styles.css';
 
-function Post({ post }) {
+function Post({ post, setCurrentPostId }) {
   const dispatch = useDispatch();
   const handleDelete = (postId) => {
     dispatch(deletePost(postId));
@@ -26,7 +26,13 @@ function Post({ post }) {
           <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
         </div>
         <div className="overlay2">
-          <Button style={{ color: 'white' }} size="small" onClick={() => {}}>
+          <Button
+            style={{ color: 'white' }}
+            size="small"
+            onClick={() => {
+              setCurrentPostId(post._id);
+            }}
+          >
             <MoreHorizIcon fontSize="medium" />
           </Button>
         </div>
@@ -36,7 +42,10 @@ function Post({ post }) {
           </Typography>
         </div>
         <CardContent>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h6" gutterBottom>
+            {post.title}
+          </Typography>
+          <Typography variant="body2" gutterBottom>
             {post.message}
           </Typography>
         </CardContent>

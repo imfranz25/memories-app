@@ -9,11 +9,7 @@ const reducer = (posts = [], action) => {
     case DELETE:
       return posts.filter((post) => post._id !== action.payload._id);
     case UPDATE:
-      return posts.map((post) => {
-        if (post._id === action.payload._id) {
-          post = { ...action.payload };
-        }
-      });
+      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
     default:
       return posts;
   }

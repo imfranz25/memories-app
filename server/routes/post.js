@@ -7,7 +7,7 @@ import { getPosts, createPost, deletePost, updatePost } from '../controllers/pos
 
 router.get('/', getPosts);
 router.post('/', createPost);
-router.patch('/', updatePost);
+router.patch('/:postId', updatePost);
 router.delete('/:postId', deletePost);
 
 export default router;

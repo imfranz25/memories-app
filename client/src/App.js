@@ -1,5 +1,5 @@
 // Modules
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, AppBar, Typography, Grid, Grow } from '@mui/material';
 
@@ -16,6 +16,7 @@ import { getPosts } from './actions/posts';
 
 function App(props) {
   const dispatch = useDispatch();
+  const [currentPostId, setCurrentPostId] = useState();
 
   useEffect(() => {
     dispatch(getPosts());
@@ -33,10 +34,10 @@ function App(props) {
         <Container>
           <Grid container justify="space-between" alignItems="stretch" spacing={3}>
             <Grid item xs={12} md={8}>
-              <Posts />
+              <Posts setCurrentPostId={setCurrentPostId} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <Form />
+              <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId} />
             </Grid>
           </Grid>
         </Container>
