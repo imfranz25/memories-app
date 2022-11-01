@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppBar, Typography, Button, Avatar, Toolbar } from '@mui/material';
+import { AppBar, Typography, Button, Avatar, Toolbar, Grid } from '@mui/material';
 
 import memories from '../../images/memories.png';
 import './styles.css';
@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <AppBar className="app-bar" position="static">
       <div className="brand-container">
-        <Typography component={Link} to="/" className="heading" variant="h2" align="center">
+        <Typography component={Link} to="/" className="heading" variant="h3" align="center">
           Memories
           <img className="image" src={memories} alt="memories" />
         </Typography>

@@ -23,6 +23,7 @@ function Form({ setCurrentPostId, currentPostId }) {
   });
 
   const clearForm = (e) => {
+    setCurrentPostId(null);
     setPostData({
       creator: '',
       title: '',
