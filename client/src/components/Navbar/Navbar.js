@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppBar, Typography, Button, Avatar, Toolbar, Grid } from '@mui/material';
+import { AppBar, Typography, Button, Avatar, Toolbar } from '@mui/material';
 
 import memories from '../../images/memories.png';
 import './styles.css';
