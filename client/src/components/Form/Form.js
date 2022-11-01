@@ -7,7 +7,7 @@ import FileBase from 'react-file-base64';
 import { createPost, updatePost } from '../../actions/posts';
 
 // Resources
-import './style.css';
+import './form-post.css';
 
 function Form({ setCurrentPostId, currentPostId }) {
   const dispatch = useDispatch();
@@ -53,8 +53,8 @@ function Form({ setCurrentPostId, currentPostId }) {
   }, [currentPostId, post]);
 
   return (
-    <Paper className="paper">
-      <form autoComplete="off" className="form" onSubmit={handleSubmit} noValidate>
+    <Paper className="paper__form-post">
+      <form autoComplete="off" className="form-post__form-post" onSubmit={handleSubmit} noValidate>
         <Typography variant="h6">{currentPostId ? 'Editing' : 'Creating'} a Memory</Typography>
         <TextField
           name="creator"
@@ -62,7 +62,7 @@ function Form({ setCurrentPostId, currentPostId }) {
           variant="outlined"
           value={postData.creator}
           onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
-          className="text-field"
+          className="text-field__form-post"
           fullWidth
         />
         <TextField
@@ -71,7 +71,7 @@ function Form({ setCurrentPostId, currentPostId }) {
           variant="outlined"
           value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-          className="text-field"
+          className="text-field__form-post"
           fullWidth
         />
         <TextField
@@ -80,7 +80,7 @@ function Form({ setCurrentPostId, currentPostId }) {
           variant="outlined"
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
-          className="text-field"
+          className="text-field__form-post"
           fullWidth
         />
         <TextField
@@ -91,10 +91,10 @@ function Form({ setCurrentPostId, currentPostId }) {
           rows={4}
           value={postData.message}
           onChange={(e) => setPostData({ ...postData, message: e.target.value })}
-          className="text-field"
+          className="text-field__form-post"
           fullWidth
         />
-        <div className="file-input">
+        <div className="file-input__form-post">
           <FileBase
             type="file"
             multiple={false}
@@ -106,7 +106,7 @@ function Form({ setCurrentPostId, currentPostId }) {
           variant="contained"
           color="primary"
           size="large"
-          className="button-submit"
+          className="button-submit__form-post"
           fullWidth
         >
           Submit
@@ -116,7 +116,7 @@ function Form({ setCurrentPostId, currentPostId }) {
           color="secondary"
           size="smail"
           onClick={clearForm}
-          className="button-submit"
+          className="button-submit__form-post"
           fullWidth
         >
           Clear

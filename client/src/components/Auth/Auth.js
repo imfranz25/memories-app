@@ -1,19 +1,25 @@
 // Modules
 import { Container, Avatar, Paper, Grid, Typography, Button } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 // Styles
-import './styles.css';
+import './auth.css';
 
 // Components
 import Input from './Input';
 import { useState } from 'react';
 
 function Auth() {
-  const isRegister = false;
   const [showPassword, setShowPassword] = useState(false);
+  const [isRegister, toggleForm] = useState(false);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const switchMode = () => {
+    toggleForm(!isRegister);
   };
 
   const handleSubmit = () => {};
@@ -22,10 +28,12 @@ function Auth() {
 
   return (
     <Container component="main" maxWidth="sm">
-      <Paper elevation={3} className="paper">
-        <Avatar className="avatar">{/* <LookOutlined /> */}</Avatar>
+      <Paper elevation={3} className="paper__auth">
+        <Avatar className="avatar__auth">
+          {isRegister ? <AccountCircleOutlinedIcon /> : <LockOutlinedIcon />}
+        </Avatar>
         <Typography variant="h5">{isRegister ? 'Register' : 'Login'}</Typography>
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form__auth" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {isRegister && (
               <>
@@ -72,12 +80,19 @@ function Auth() {
               type="submit"
               variant="contained"
               color="primary"
-              className="btn-submit"
+              className="btn-submit__auth"
               size="large"
               fullWidth
             >
               {isRegister ? 'Register' : 'Login'}
             </Button>
+            <Grid justifyContent="flex-end" container>
+              <Grid item>
+                <Button onClick={switchMode} style={{ textTransform: 'unset' }}>
+                  {isRegister ? 'Already have an account?' : "Don't have an account?"}
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
         </form>
       </Paper>

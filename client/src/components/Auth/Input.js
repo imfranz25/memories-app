@@ -13,7 +13,7 @@ function Input({ half, name, handleChange, label, autoFocus, type, handleShowPas
         label={label}
         autoFocus={autoFocus}
         type={type}
-        className="input-field"
+        className="input-field__auth"
         fullWidth
         required
         InputProps={
