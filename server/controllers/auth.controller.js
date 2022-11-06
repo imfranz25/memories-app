@@ -18,8 +18,8 @@ const createUser = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    if (hashedPassword) {
-      return res.status(409).json({ message: 'Something went wrong, please try again...' });
+    if (!hashedPassword) {
+      throw new Error('Something went wrong...');
     }
 
     const newUser = new User({ ...req.body, password: hashedPassword });

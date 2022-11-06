@@ -10,6 +10,7 @@ import compressionConfig from './utils/compression.js';
 
 // Routes
 import postRoute from './routes/post.js';
+import authRoute from './routes/auth.js';
 
 // Initialization
 const app = express();
@@ -26,9 +27,14 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true })); // Accept For
 
 // User Routes
 app.use('/posts', postRoute);
+app.use('/auth', authRoute);
 
 app.get('/', (req, res) => {
   res.send('Memories API by Francis Ong');
+});
+
+app.use((error, req, res, next) => {
+  res.status(500).json({ message: 'Something went wrong', error: error });
 });
 
 mongoose
