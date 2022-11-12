@@ -3,3 +3,4 @@ node_modules
 
 # Hidden Files
 .env
+.env.development

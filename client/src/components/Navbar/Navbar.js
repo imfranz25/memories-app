@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { LOGOUT } from '../../constants/actionTypes';
 import { AppBar, Typography, Button, Avatar, Toolbar } from '@mui/material';
 
@@ -8,6 +8,7 @@ import memories from '../../images/memories.png';
 import './styles.css';
 
 function Navbar() {
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -20,12 +21,12 @@ function Navbar() {
     setUser(null);
   };
 
-  // useEffect(() => {
-  //   // const token = user?.sub;
+  useEffect(() => {
+    // const token = user?.sub;
 
-  //   // JWT....
-  //   setUser(JSON.parse(localStorage.getItem('profile')));
-  // }, []);
+    // JWT....
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, [location]);
 
   return (
     <AppBar className="app-bar" position="static">
