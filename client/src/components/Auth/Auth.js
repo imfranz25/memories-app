@@ -1,33 +1,33 @@
 // Modules
-import jwt_decode from 'jwt-decode';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { useState } from 'react';
 import { AUTH } from '../../constants/actionTypes';
 import { Container, Avatar, Paper, Grid, Typography, Button } from '@mui/material';
 import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
-// Styles
+// Styles, Components & Actions
 import './auth.css';
-
-// Components & Helper Functions
 import Input from './Input';
-import { useState } from 'react';
+import { signUp, signIn } from '../../actions/auth';
+
+const initialFormState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
 
 function Auth() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [isRegister, toggleForm] = useState(false);
-
-  // const [userData, setUserData] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   email: '',
-  //   password: '',
-  //   confirmPassword: '',
-  // });
+  const [formData, setFormData] = useState(initialFormState);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -38,9 +38,19 @@ function Auth() {
     setShowPassword(false);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleChange = () => {};
+    if (isRegister) {
+      dispatch(signUp(formData, navigate));
+    } else {
+      dispatch(signIn(formData, navigate));
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const googleSuccess = async (res) => {
     const result = jwt_decode(res?.credential);
@@ -118,10 +128,12 @@ function Auth() {
                 {isRegister ? 'Register' : 'Login'}
               </Button>
             </Grid>
-            <Grid justifyContent="center" item container>
-              <GoogleLogin onSuccess={googleSuccess} onError={googleError} />
-            </Grid>
-            <Grid justifyContent="flex-end" container>
+            {!isRegister && (
+              <Grid justifyContent="center" item container>
+                <GoogleLogin onSuccess={googleSuccess} onError={googleError} />
+              </Grid>
+            )}
+            <Grid justifyContent="center" marginTop={3} container>
               <Grid item>
                 <Button onClick={switchMode} className="button__form-switch">
                   {isRegister ? 'Already have an account?' : "Don't have an account?"}

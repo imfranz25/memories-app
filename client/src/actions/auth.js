@@ -1,13 +1,24 @@
-import * as api from '../api/index';
-import { FETCH_ALL, CREATE, DELETE, UPDATE } from '../constants/actionTypes.js';
+// import * as api from '../api/index';
+// import { AUTH } from '../constants/actionTypes';
 
-const createUser = (newUser) => async (dispatch) => {
+const signUp = (userDetails, navigate) => async (dispatch) => {
   try {
-    const { data } = await api.createUser(newUser);
-    dispatch({ type: FETCH_ALL, payload: data });
+    // const { data } = await api.createUser(newUser);
+    // dispatch({ type: FETCH_ALL, payload: data });
+    navigate('/');
   } catch (error) {
     console.log(error);
   }
 };
 
-export { createUser };
+const signIn = (userCredentials, navigate) => async (dispatch) => {
+  try {
+    // const { data } = await api.createUser(newUser);
+    // dispatch({ type: FETCH_ALL, payload: data });
+    navigate('/');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { signUp, signIn };
