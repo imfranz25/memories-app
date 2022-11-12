@@ -14,12 +14,21 @@ function Auth() {
   const [showPassword, setShowPassword] = useState(false);
   const [isRegister, toggleForm] = useState(false);
 
+  // const [userData, setUserData] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   password: '',
+  //   confirmPassword: '',
+  // });
+
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const switchMode = () => {
     toggleForm(!isRegister);
+    setShowPassword(false);
   };
 
   const handleSubmit = () => {};
@@ -27,7 +36,7 @@ function Auth() {
   const handleChange = () => {};
 
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="xs">
       <Paper elevation={3} className="paper__auth">
         <Avatar className="avatar__auth">
           {isRegister ? <AccountCircleOutlinedIcon /> : <LockOutlinedIcon />}
@@ -76,19 +85,21 @@ function Auth() {
                 handleChange={handleChange}
               />
             )}
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className="btn-submit__auth"
-              size="large"
-              fullWidth
-            >
-              {isRegister ? 'Register' : 'Login'}
-            </Button>
+            <Grid item md={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="btn-submit__auth"
+                size="large"
+                fullWidth
+              >
+                {isRegister ? 'Register' : 'Login'}
+              </Button>
+            </Grid>
             <Grid justifyContent="flex-end" container>
               <Grid item>
-                <Button onClick={switchMode} style={{ textTransform: 'unset' }}>
+                <Button onClick={switchMode} className="button__form-switch">
                   {isRegister ? 'Already have an account?' : "Don't have an account?"}
                 </Button>
               </Grid>

@@ -25,3 +25,7 @@
 .btn-submit__auth {
   margin: 12px 0 !important;
 }
+
+.button__form-switch{
+  text-transform: unset !important;
+}

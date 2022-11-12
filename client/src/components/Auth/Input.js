@@ -2,9 +2,9 @@ import { TextField, Grid, InputAdornment, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-function Input({ half, name, handleChange, label, autoFocus, type, handleShowPassword }) {
+function Input({ half, name, handleChange, label, autoFocus, type, handleShowPassword, value }) {
   return (
-    <Grid xs={half ? 6 : 12} md={12}>
+    <Grid item xs={half ? 6 : 12} md={half ? 6 : 12}>
       <TextField
         variant="outlined"
         size="small"

@@ -1,9 +1,14 @@
 import axios from 'axios';
 
-const url = 'http://localhost:8080/posts';
+const URL = 'http://localhost:8080';
 
-export const fetchPost = () => axios.get(url);
-export const createPost = (newPost) => axios.post(url, newPost);
-export const updatePost = (postId, updatedPost) => axios.patch(`${url}/${postId}`, updatedPost);
-export const likePost = (postId) => axios.patch(`${url}/like/${postId}`);
-export const deletePost = (postId) => axios.delete(`${url}/${postId}`);
+// Post API Endpoints
+export const fetchPost = () => axios.get(`${URL}/posts`);
+export const createPost = (newPost) => axios.post(`${URL}/posts`, newPost);
+export const updatePost = (postId, updatedPost) =>
+  axios.patch(`${URL}/posts/${postId}`, updatedPost);
+export const likePost = (postId) => axios.patch(`${URL}/posts//like/${postId}`);
+export const deletePost = (postId) => axios.delete(`${URL}/posts/${postId}`);
+
+// Auth API Endpoints
+export const createUser = (newUser) => axios.post(`${URL}/auth/register`);

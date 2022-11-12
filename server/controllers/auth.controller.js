@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-import User from '../models/user';
+import User from '../models/user.js';
 
 const createUser = async (req, res, next) => {
   const { email, password, confirmPassword } = req.body;
@@ -30,3 +30,5 @@ const createUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export { createUser };
