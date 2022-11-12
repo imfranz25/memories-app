@@ -10,7 +10,7 @@ import compressionConfig from './utils/compression.js';
 
 // Routes
 import postRoute from './routes/post.js';
-import authRoute from './routes/auth.js';
+import userRoute from './routes/user.js';
 
 // Initialization
 const app = express();
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true })); // Accept For
 
 // User Routes
 app.use('/posts', postRoute);
-app.use('/auth', authRoute);
+app.use('/user', userRoute);
 
 app.get('/', (req, res) => {
   res.send('Memories API by Francis Ong');

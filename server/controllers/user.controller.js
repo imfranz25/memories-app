@@ -1,13 +1,11 @@
+// 3rd Party Modules
 import bcrypt from 'bcrypt';
 
-import User from '../models/user.js';
+// Models
+import User from '../models/user.model.js';
 
 const createUser = async (req, res, next) => {
-  const { email, password, confirmPassword } = req.body;
-
-  if (password !== confirmPassword) {
-    return res.status(422).json({ message: 'Password and Confirm Password does not match!' });
-  }
+  const { email, password } = req.body;
 
   try {
     const isUserExist = await User.findOne({ email: email });
