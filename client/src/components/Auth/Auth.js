@@ -1,16 +1,23 @@
 // Modules
-import { Container, Avatar, Paper, Grid, Typography, Button } from '@mui/material';
+import jwt_decode from 'jwt-decode';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { AUTH } from '../../constants/actionTypes';
+import { Container, Avatar, Paper, Grid, Typography, Button } from '@mui/material';
+import { GoogleLogin } from '@react-oauth/google';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // Styles
 import './auth.css';
 
-// Components
+// Components & Helper Functions
 import Input from './Input';
 import { useState } from 'react';
 
 function Auth() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [isRegister, toggleForm] = useState(false);
 
@@ -34,6 +41,20 @@ function Auth() {
   const handleSubmit = () => {};
 
   const handleChange = () => {};
+
+  const googleSuccess = async (res) => {
+    const result = jwt_decode(res?.credential);
+
+    try {
+      dispatch({ type: AUTH, data: result });
+
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const googleError = () => {};
 
   return (
     <Container component="main" maxWidth="xs">
@@ -85,7 +106,7 @@ function Auth() {
                 handleChange={handleChange}
               />
             )}
-            <Grid item md={12}>
+            <Grid item sm={12}>
               <Button
                 type="submit"
                 variant="contained"
@@ -96,6 +117,9 @@ function Auth() {
               >
                 {isRegister ? 'Register' : 'Login'}
               </Button>
+            </Grid>
+            <Grid justifyContent="center" item container>
+              <GoogleLogin onSuccess={googleSuccess} onError={googleError} />
             </Grid>
             <Grid justifyContent="flex-end" container>
               <Grid item>

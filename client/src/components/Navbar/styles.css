@@ -21,14 +21,15 @@
 }
 
 .toolbar {
-  width: 100px;
+  width: 350px;
   display: flex;
   justify-content: flex-end;
 }
 
 .profile {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-items: center;
   width: 400px;
 }
 
@@ -41,4 +42,5 @@
   /* color: theme.palette.getContrastText(deepPurple[500], */
   color: blueviolet;
   background-color: rgb(56, 3, 56);
+  margin-right: 8px;
 }

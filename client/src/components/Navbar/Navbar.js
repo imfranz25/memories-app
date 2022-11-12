@@ -1,10 +1,32 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { LOGOUT } from '../../constants/actionTypes';
 import { AppBar, Typography, Button, Avatar, Toolbar } from '@mui/material';
 
 import memories from '../../images/memories.png';
 import './styles.css';
+
 function Navbar() {
-  const user = null;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+
+  const handleLogout = () => {
+    dispatch({ type: LOGOUT });
+
+    navigate('/auth');
+
+    setUser(null);
+  };
+
+  // useEffect(() => {
+  //   // const token = user?.sub;
+
+  //   // JWT....
+  //   setUser(JSON.parse(localStorage.getItem('profile')));
+  // }, []);
+
   return (
     <AppBar className="app-bar" position="static">
       <div className="brand-container">
@@ -16,13 +38,13 @@ function Navbar() {
       <Toolbar className="toolbar">
         {user ? (
           <div className="profile">
-            <Avatar className="purple" alt={user.result.name} src={user.result.image}>
-              {user.result.name.charAt(0)}
+            <Avatar className="purple" alt={user.name} src={user.picture}>
+              {user.name.charAt(0)}
             </Avatar>
             <Typography className="username" variant="h6">
-              {user.result.name}
+              {user.given_name}
             </Typography>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={handleLogout}>
               Logout
             </Button>
           </div>

@@ -3,6 +3,20 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function Input({ half, name, handleChange, label, autoFocus, type, handleShowPassword, value }) {
+  let inputProps = {
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton onClick={handleShowPassword}>
+          {type === 'password' ? <VisibilityIcon /> : <VisibilityOffIcon />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  };
+
+  if (name !== 'password') {
+    inputProps = {};
+  }
+
   return (
     <Grid item xs={half ? 6 : 12} md={half ? 6 : 12}>
       <TextField
@@ -16,17 +30,7 @@ function Input({ half, name, handleChange, label, autoFocus, type, handleShowPas
         className="input-field__auth"
         fullWidth
         required
-        InputProps={
-          name === 'password' && {
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={handleShowPassword}>
-                  {type === 'password' ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }
-        }
+        InputProps={inputProps}
       />
     </Grid>
   );
