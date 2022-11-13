@@ -9,8 +9,8 @@ import dotenv from 'dotenv';
 import compressionConfig from './utils/compression.js';
 
 // Routes
-import postRoute from './routes/post.js';
-import userRoute from './routes/user.js';
+import postRoute from './routes/post.route.js';
+import userRoute from './routes/user.route.js';
 
 // Initialization
 const app = express();

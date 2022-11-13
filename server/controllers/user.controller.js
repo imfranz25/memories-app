@@ -1,19 +1,19 @@
 // 3rd Party Modules
 import bcrypt from 'bcrypt';
+import { validationResult } from 'express-validator';
 
 // Models
 import User from '../models/user.model.js';
 
-const createUser = async (req, res, next) => {
-  const { email, password } = req.body;
+const signUp = async (req, res, next) => {
+  const errors = validationResult(req);
+  const { password } = req.body;
+
+  if (!errors.isEmpty) {
+    return res.status(422).json({ message: 'Invalid Input', errors: errors.array() });
+  }
 
   try {
-    const isUserExist = await User.findOne({ email: email });
-
-    if (isUserExist) {
-      return res.status(422).json({ message: 'Email already taken, please try again...' });
-    }
-
     const hashedPassword = await bcrypt.hash(password, 12);
 
     if (!hashedPassword) {
@@ -25,8 +25,20 @@ const createUser = async (req, res, next) => {
 
     res.status(201).json(createdUser);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
 
-export { createUser };
+const signIn = async (req, res, next) => {
+  const errors = validationResult(req);
+  const { email, password } = req.body;
+
+  try {
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+export { signUp };

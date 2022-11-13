@@ -1,5 +1,5 @@
-import mongoose, { isValidObjectId } from 'mongoose';
-import PostMessage from '../models/postMessage.js';
+import mongoose from 'mongoose';
+import PostMessage from '../models/post.model.js';
 
 const getPosts = async (req, res, next) => {
   try {
