@@ -46,4 +46,13 @@ const userSignUpValidator = [
     .withMessage('Password and confirm password doest not match'),
 ];
 
-export { userSignUpValidator };
+const userSignInValidator = [
+  body('email')
+    .trim()
+    .isEmail()
+    .withMessage('Input a valid email')
+    .normalizeEmail({ gmail_remove_dots: false }),
+  body('password').trim().not().isEmpty().withMessage('Password is required'),
+];
+
+export { userSignUpValidator, userSignInValidator };
